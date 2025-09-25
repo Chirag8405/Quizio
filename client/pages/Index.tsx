@@ -35,7 +35,36 @@ export default function Index() {
       return;
     }
     
-    window.open(category.pptPath, "_blank", "noopener,noreferrer");
+    // Show a brief visual feedback
+    console.log(`Opening ${category.name} presentation...`);
+    
+    // Detect operating system
+    const isWindows = navigator.platform.toLowerCase().includes('win');
+    const isLinux = navigator.platform.toLowerCase().includes('linux');
+    
+    if (isLinux) {
+      // On Linux, try multiple approaches for better compatibility
+      console.log('Linux detected - trying multiple opening methods');
+      
+      // Method 1: Try direct open
+      const opened = window.open(category.pptPath, '_blank', 'noopener,noreferrer');
+      
+      // Method 2: If that doesn't work, try with different approach
+      if (!opened) {
+        // Create a clickable link as fallback
+        const link = document.createElement('a');
+        link.href = category.pptPath;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } else {
+      // On Windows (and other systems), use standard approach
+      console.log('Windows/Other OS detected - using standard method');
+      window.open(category.pptPath, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
@@ -80,7 +109,7 @@ export default function Index() {
                   <h3 className="text-base md:text-lg font-bold drop-shadow-sm leading-tight">
                     {cat.name}
                   </h3>
-                  <p className="text-xs md:text-sm text-white/80">Click to view</p>
+                  <p className="text-xs md:text-sm text-white/80">Click to open</p>
                 </div>
                 <div className="absolute -right-3 -bottom-3 size-16 md:size-20 rounded-full bg-white/10 blur-sm transition-all duration-300 group-hover:scale-125" />
               </motion.button>

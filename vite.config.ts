@@ -6,8 +6,17 @@ import { createServer } from "./server";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: "localhost",
     port: 8080,
+    strictPort: false,
+    hmr: {
+      overlay: true,
+      host: "localhost",
+      port: 8080,
+    },
+    watch: {
+      usePolling: false,
+    },
     fs: {
       allow: [".", "./client", "./shared"],
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
@@ -15,6 +24,12 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
+  },
+  optimizeDeps: {
+    include: ["react", "react-dom"],
+  },
+  esbuild: {
+    logOverride: { "this-is-undefined-in-esm": "silent" },
   },
   plugins: [react(), expressPlugin()],
   resolve: {
@@ -33,7 +48,19 @@ function expressPlugin(): Plugin {
       const app = createServer();
 
       // Add Express app as middleware to Vite dev server
-      server.middlewares.use(app);
+      server.middlewares.use('/api', app);
+      
+      // Configure proper MIME types for PowerPoint files
+      server.middlewares.use('/presentations', (req, res, next) => {
+        if (req.url?.endsWith('.pptx')) {
+          res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.presentationml.presentation');
+          res.setHeader('Content-Disposition', 'inline');
+        } else if (req.url?.endsWith('.ppt')) {
+          res.setHeader('Content-Type', 'application/vnd.ms-powerpoint');
+          res.setHeader('Content-Disposition', 'inline');
+        }
+        next();
+      });
     },
   };
 }

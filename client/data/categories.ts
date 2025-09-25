@@ -12,42 +12,42 @@ export const categories: Category[] = [
     name: "Bollywood Actors", 
     gradientFrom: "from-rose-500", 
     gradientTo: "to-orange-500",
-    pptPath: "/presentations/Flags.pdf"
+    pptPath: "/presentations/ppts/round 1/BollywoodMovies.pptx"
   },
   { 
-    id: "crickters", 
-    name: "Crickters", 
+    id: "football-players", 
+    name: "Football Players", 
     gradientFrom: "from-emerald-500", 
     gradientTo: "to-teal-600",
-    pptPath: "https://drive.google.com/file/d/YOUR_FILE_ID_HERE/preview"
+    pptPath: "/presentations/ppts/round 1/Football players.pptx"
   },
   { 
-    id: "marvel", 
-    name: "Marvel", 
+    id: "dc", 
+    name: "DC", 
     gradientFrom: "from-indigo-500", 
     gradientTo: "to-purple-600",
-    pptPath: "/presentations/marvel.pptx"
+    pptPath: "/presentations/ppts/round 1/DC.pdf.pptx"
   },
   { 
-    id: "political-leaders", 
-    name: "Political Leaders", 
+    id: "f1-drivers", 
+    name: "F1 Drivers", 
     gradientFrom: "from-cyan-500", 
     gradientTo: "to-sky-600",
-    pptPath: "/presentations/political-leaders.pptx"
+    pptPath: "/presentations/ppts/round 1/F1 drivers.pptx"
   },
   { 
-    id: "singers", 
-    name: "Singers", 
+    id: "animals-birds", 
+    name: "Animals & Birds", 
     gradientFrom: "from-fuchsia-500", 
     gradientTo: "to-pink-600",
-    pptPath: "/presentations/singers.pptx"
+    pptPath: "/presentations/ppts/round 1/animal and Birds 1.pptx"
   },
   { 
-    id: "hollywood-actors", 
-    name: "Hollywood Actors", 
+    id: "indian-athletes", 
+    name: "Indian Athletes", 
     gradientFrom: "from-violet-500", 
     gradientTo: "to-indigo-700",
-    pptPath: "/presentations/hollywood-actors.pptx"
+    pptPath: "/presentations/ppts/round 1/Indian atheletes.pptx"
   },
   { 
     id: "hollywood-movies", 
